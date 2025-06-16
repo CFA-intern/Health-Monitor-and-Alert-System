@@ -29,7 +29,7 @@ const AlertListener = () => {
     if (Notification.permission === 'granted') {
       new Notification('⚠️ Health Alert', {
         body: message,
-        icon: '/alert-icon.png', // optional: add a favicon path or use default
+        icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIA...', // optional: add a favicon path or use default
       });
     }
   };

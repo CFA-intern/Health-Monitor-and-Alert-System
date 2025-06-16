@@ -5,7 +5,6 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/Health-Monitor-and-Alert-System/',
   server: {
     host: "::",
     port: 8080,
