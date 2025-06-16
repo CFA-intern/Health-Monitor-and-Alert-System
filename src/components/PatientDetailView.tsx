@@ -1,4 +1,3 @@
-
 import { Patient, useData } from '../contexts/DataContext';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { X, User, Phone, Stethoscope, Clock, Activity } from 'lucide-react';
@@ -11,7 +10,7 @@ interface PatientDetailViewProps {
 
 const PatientDetailView: React.FC<PatientDetailViewProps> = ({ patient, onClose }) => {
   const { doctors, caretakers } = useData();
-  
+
   const assignedDoctor = doctors.find(d => d.id === patient.doctorId);
   const assignedCaretakers = caretakers.filter(c => patient.assignedCaretakers.includes(c.id));
 
@@ -65,7 +64,12 @@ const PatientDetailView: React.FC<PatientDetailViewProps> = ({ patient, onClose 
                 <p><span className="font-medium">Name:</span> {patient.name}</p>
                 <p><span className="font-medium">Age:</span> {patient.age} years</p>
                 <p><span className="font-medium">Condition:</span> {patient.condition}</p>
-                <p><span className="font-medium">Emergency Contact:</span> {patient.emergencyContact}</p>
+                <p>
+                  <span className="font-medium">Emergency Contact:</span>{" "}
+                  <a href={`tel:${patient.emergencyContact}`} className="text-blue-600 hover:underline">
+                    {patient.emergencyContact}
+                  </a>
+                </p>
                 {patient.remarks && (
                   <p><span className="font-medium">Remarks:</span> {patient.remarks}</p>
                 )}
@@ -77,7 +81,7 @@ const PatientDetailView: React.FC<PatientDetailViewProps> = ({ patient, onClose 
                 <Stethoscope className="h-5 w-5 text-green-600" />
                 Medical Team
               </h3>
-              
+
               {assignedDoctor && (
                 <div className="mb-3">
                   <p className="font-medium text-sm">Assigned Doctor:</p>
@@ -85,7 +89,9 @@ const PatientDetailView: React.FC<PatientDetailViewProps> = ({ patient, onClose 
                   <p className="text-sm text-gray-600">{assignedDoctor.specialization}</p>
                   <div className="flex items-center gap-1 text-sm">
                     <Phone className="h-3 w-3" />
-                    <span>{assignedDoctor.phone}</span>
+                    <a href={`tel:${assignedDoctor.phone}`} className="text-blue-600 hover:underline">
+                      {assignedDoctor.phone}
+                    </a>
                   </div>
                 </div>
               )}
@@ -97,7 +103,9 @@ const PatientDetailView: React.FC<PatientDetailViewProps> = ({ patient, onClose 
                     <p>{caretaker.name}</p>
                     <div className="flex items-center gap-1 text-gray-600">
                       <Phone className="h-3 w-3" />
-                      <span>{caretaker.phone}</span>
+                      <a href={`tel:${caretaker.phone}`} className="text-blue-600 hover:underline">
+                        {caretaker.phone}
+                      </a>
                     </div>
                   </div>
                 ))}
@@ -125,7 +133,7 @@ const PatientDetailView: React.FC<PatientDetailViewProps> = ({ patient, onClose 
                 min={60}
                 max={100}
               />
-              
+
               <VitalCard
                 label="Blood Pressure"
                 value={patient.vitals.bloodPressureSystolic}
@@ -135,7 +143,7 @@ const PatientDetailView: React.FC<PatientDetailViewProps> = ({ patient, onClose 
                 min={90}
                 max={140}
               />
-              
+
               <VitalCard
                 label="SpO₂"
                 value={patient.vitals.spO2}
@@ -145,7 +153,7 @@ const PatientDetailView: React.FC<PatientDetailViewProps> = ({ patient, onClose 
                 min={95}
                 max={100}
               />
-              
+
               <VitalCard
                 label="Temperature"
                 value={patient.vitals.temperature}
@@ -161,7 +169,7 @@ const PatientDetailView: React.FC<PatientDetailViewProps> = ({ patient, onClose 
           {/* Health Charts */}
           <div>
             <h3 className="text-lg font-semibold mb-4">24-Hour Health Trends</h3>
-            
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-white border rounded-lg p-4">
                 <h4 className="font-medium mb-3">Heart Rate (bpm)</h4>

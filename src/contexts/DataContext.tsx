@@ -65,14 +65,14 @@ interface DataContextType {
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 const initialDoctors: Doctor[] = [
-  { id: '1', name: 'Dr. Sarah Wilson', phone: '+1-555-0101', specialization: 'Cardiology' },
-  { id: '2', name: 'Dr. Michael Chen', phone: '+1-555-0102', specialization: 'Internal Medicine' },
-  { id: '3', name: 'Dr. Emily Rodriguez', phone: '+1-555-0103', specialization: 'Pulmonology' },
+  { id: '1', name: 'Dr. Sarah Wilson', phone: '+91 9123456789', specialization: 'Cardiology' },
+  { id: '2', name: 'Dr. Michael Chen', phone: '+91 9876543210', specialization: 'Internal Medicine' },
+  { id: '3', name: 'Dr. Emily Rodriguez', phone: '+91 9012345678 ', specialization: 'Pulmonology' },
 ];
 
 const initialCaretakers: Caretaker[] = [
-  { id: '3', name: 'Alice Johnson', phone: '+1-555-0201' },
-  { id: '4', name: 'Bob Wilson', phone: '+1-555-0202' },
+  { id: '3', name: 'Alice Johnson', phone: '+91 9988776655' },
+  { id: '4', name: 'Bob Wilson', phone: '+91 9090909090' },
 ];
 
 const generateVitalHistory = (): Vitals[] => {
@@ -102,7 +102,7 @@ const initialPatients: Patient[] = [
     condition: 'Hypertension',
     assignedCaretakers: ['3'],
     doctorId: '1',
-    emergencyContact: '+1-555-0301',
+    emergencyContact: '+91 8008008008',
     vitals: {
       heartRate: 75,
       bloodPressureSystolic: 120,
@@ -121,7 +121,7 @@ const initialPatients: Patient[] = [
     condition: 'Diabetes',
     assignedCaretakers: ['3', '4'],
     doctorId: '2',
-    emergencyContact: '+1-555-0302',
+    emergencyContact: '+91 7777777777 ',
     vitals: {
       heartRate: 68,
       bloodPressureSystolic: 110,
@@ -140,7 +140,7 @@ const initialPatients: Patient[] = [
     condition: 'Heart Disease',
     assignedCaretakers: ['4'],
     doctorId: '1',
-    emergencyContact: '+1-555-0303',
+    emergencyContact: '+91 8123456789',
     vitals: {
       heartRate: 85,
       bloodPressureSystolic: 140,
@@ -159,7 +159,7 @@ const initialPatients: Patient[] = [
     condition: 'COPD',
     assignedCaretakers: ['3'],
     doctorId: '3',
-    emergencyContact: '+1-555-0304',
+    emergencyContact: '+91 8899889988 ',
     vitals: {
       heartRate: 78,
       bloodPressureSystolic: 125,

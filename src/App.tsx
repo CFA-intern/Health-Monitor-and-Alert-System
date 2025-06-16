@@ -13,7 +13,7 @@ import DoctorDashboard from "./pages/DoctorDashboard";
 import CaretakerDashboard from "./pages/CaretakerDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
-
+import AlertListener from "./components/AlertListener";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -53,6 +53,7 @@ const App = () => (
               />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <AlertListener/>
           </BrowserRouter>
         </DataProvider>
       </AuthProvider>

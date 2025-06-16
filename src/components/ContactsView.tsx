@@ -1,4 +1,3 @@
-
 import { useData } from '../contexts/DataContext';
 import { Phone, User, Stethoscope, Ambulance } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
@@ -11,18 +10,17 @@ const ContactsView: React.FC<ContactsViewProps> = ({ showAll = false }) => {
   const { patients, doctors, caretakers } = useData();
   const { user } = useAuth();
 
-  // For caretakers, filter to only show their assigned patients
   const relevantPatients = showAll || !user?.id 
     ? patients 
     : patients.filter(patient => patient.assignedCaretakers.includes(user.id));
 
   const emergencyContacts = [
-    { name: 'Emergency Services', number: '911', icon: Ambulance, type: 'Emergency' },
+    { name: 'Police Service', number: '100', icon: Ambulance, type: 'Emergency' },
     { name: 'Ambulance Service', number: '108', icon: Ambulance, type: 'Emergency' },
-    { name: 'Hospital Front Desk', number: '555-123-4567', icon: Phone, type: 'Main' },
+    { name: 'Hospital Front Desk', number: '044-22334455', icon: Phone, type: 'Main' },
+    
   ];
 
-  // Get relevant doctors based on patients
   const relevantDoctorIds = showAll 
     ? doctors.map(d => d.id)
     : [...new Set(relevantPatients.map(p => p.doctorId))];
@@ -45,7 +43,7 @@ const ContactsView: React.FC<ContactsViewProps> = ({ showAll = false }) => {
                   <h3 className="font-medium text-red-800">{contact.name}</h3>
                   <div className="flex items-center gap-1 text-red-700">
                     <Phone className="h-4 w-4" />
-                    <span className="font-mono text-lg">{contact.number}</span>
+                    <a href={`tel:${contact.number}`} className="font-mono text-lg hover:underline">{contact.number}</a>
                   </div>
                 </div>
               </div>
@@ -74,7 +72,7 @@ const ContactsView: React.FC<ContactsViewProps> = ({ showAll = false }) => {
                       <p className="text-sm text-blue-600 mb-2">{doctor.specialization}</p>
                       <div className="flex items-center gap-1 text-blue-700 mb-2">
                         <Phone className="h-4 w-4" />
-                        <span className="font-mono">{doctor.phone}</span>
+                        <a href={`tel:${doctor.phone}`} className="font-mono hover:underline">{doctor.phone}</a>
                       </div>
                       {assignedPatients.length > 0 && (
                         <div className="text-xs text-blue-600">
@@ -90,10 +88,9 @@ const ContactsView: React.FC<ContactsViewProps> = ({ showAll = false }) => {
         )}
       </div>
 
-      {/* Show caretakers and patient emergency contacts only if showAll=true or for an admin user */}
+      {/* Caretakers & Patient Emergency Contacts (for showAll) */}
       {showAll && (
         <>
-          {/* Caretakers */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Caretakers</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -109,7 +106,7 @@ const ContactsView: React.FC<ContactsViewProps> = ({ showAll = false }) => {
                         <h3 className="font-medium text-green-800">{caretaker.name}</h3>
                         <div className="flex items-center gap-1 text-green-700 mb-2">
                           <Phone className="h-4 w-4" />
-                          <span className="font-mono">{caretaker.phone}</span>
+                          <a href={`tel:${caretaker.phone}`} className="font-mono hover:underline">{caretaker.phone}</a>
                         </div>
                         <div className="text-xs text-green-600">
                           Patients: {assignedPatients.map(p => p.name).join(', ')}
@@ -122,7 +119,6 @@ const ContactsView: React.FC<ContactsViewProps> = ({ showAll = false }) => {
             </div>
           </div>
 
-          {/* Patient Emergency Contacts */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold mb-4">Patient Emergency Contacts</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -136,7 +132,7 @@ const ContactsView: React.FC<ContactsViewProps> = ({ showAll = false }) => {
                       <h3 className="font-medium text-orange-800">{patient.name}</h3>
                       <div className="flex items-center gap-1 text-orange-700">
                         <Phone className="h-4 w-4" />
-                        <span className="font-mono">{patient.emergencyContact}</span>
+                        <a href={`tel:${patient.emergencyContact}`} className="font-mono hover:underline">{patient.emergencyContact}</a>
                       </div>
                       <p className="text-xs text-orange-600">{patient.condition}</p>
                     </div>
@@ -148,7 +144,7 @@ const ContactsView: React.FC<ContactsViewProps> = ({ showAll = false }) => {
         </>
       )}
 
-      {/* For caretakers, only show their patients' emergency contacts */}
+      {/* Caretaker's Patient Emergency Contacts */}
       {!showAll && user?.role === 'caretaker' && (
         <div className="bg-white rounded-lg shadow-md p-6">
           <h2 className="text-xl font-semibold mb-4">Your Patients' Emergency Contacts</h2>
@@ -163,7 +159,7 @@ const ContactsView: React.FC<ContactsViewProps> = ({ showAll = false }) => {
                     <h3 className="font-medium text-orange-800">{patient.name}</h3>
                     <div className="flex items-center gap-1 text-orange-700">
                       <Phone className="h-4 w-4" />
-                      <span className="font-mono">{patient.emergencyContact}</span>
+                      <a href={`tel:${patient.emergencyContact}`} className="font-mono hover:underline">{patient.emergencyContact}</a>
                     </div>
                     <p className="text-xs text-orange-600">{patient.condition}</p>
                   </div>

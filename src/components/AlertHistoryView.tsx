@@ -114,7 +114,27 @@ const AlertHistoryView: React.FC<AlertHistoryViewProps> = ({ patientIds }) => {
   };
 
   return (
+    
+    
     <div className="space-y-6">
+     {/* Summary Stats */}
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <h3 className="text-lg font-semibold mb-4">Alert Summary</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-red-50 p-4 rounded-lg">
+            <p className="text-2xl font-bold text-red-600">{unresolvedAlerts.length}</p>
+            <p className="text-sm text-red-700">Active Alerts</p>
+          </div>
+          <div className="bg-green-50 p-4 rounded-lg">
+            <p className="text-2xl font-bold text-green-600">{resolvedAlerts.length}</p>
+            <p className="text-sm text-green-700">Resolved Alerts</p>
+          </div>
+          <div className="bg-blue-50 p-4 rounded-lg">
+            <p className="text-2xl font-bold text-blue-600">{sortedAlerts.length}</p>
+            <p className="text-sm text-blue-700">Total Alerts</p>
+          </div>
+        </div>
+      </div>
       {/* Active Alerts */}
       {unresolvedAlerts.length > 0 && (
         <div className="bg-white rounded-lg shadow-md p-6">
@@ -139,24 +159,7 @@ const AlertHistoryView: React.FC<AlertHistoryViewProps> = ({ patientIds }) => {
         </div>
       )}
 
-      {/* Summary Stats */}
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-semibold mb-4">Alert Summary</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-red-50 p-4 rounded-lg">
-            <p className="text-2xl font-bold text-red-600">{unresolvedAlerts.length}</p>
-            <p className="text-sm text-red-700">Active Alerts</p>
-          </div>
-          <div className="bg-green-50 p-4 rounded-lg">
-            <p className="text-2xl font-bold text-green-600">{resolvedAlerts.length}</p>
-            <p className="text-sm text-green-700">Resolved Alerts</p>
-          </div>
-          <div className="bg-blue-50 p-4 rounded-lg">
-            <p className="text-2xl font-bold text-blue-600">{sortedAlerts.length}</p>
-            <p className="text-sm text-blue-700">Total Alerts</p>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 };
